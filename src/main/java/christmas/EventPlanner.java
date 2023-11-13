@@ -28,11 +28,11 @@ public class EventPlanner {
     public Map<Event, Integer> totalDiscountDetails() {
         Map<Event, Integer> discountAmount = new HashMap<>();
         if (isEligibleForDiscount()) {
-            discountAmount.putAll(calculateDiscount(new ChristmasDdayEvent(visitDate)));
-            discountAmount.putAll(calculateDiscount(new WeekdayEvent(visitDate, orders)));
-            discountAmount.putAll(calculateDiscount(new WeekendEvent(visitDate, orders)));
-            discountAmount.putAll(calculateDiscount(new StarEvent(visitDate)));
-            discountAmount.putAll(calculateDiscount(new GiftEvent(totalPriceBeforeDiscount())));
+            addDiscountIfNotZero(new ChristmasDdayEvent(visitDate), discountAmount);
+            addDiscountIfNotZero(new WeekdayEvent(visitDate, orders), discountAmount);
+            addDiscountIfNotZero(new WeekendEvent(visitDate, orders), discountAmount);
+            addDiscountIfNotZero(new StarEvent(visitDate), discountAmount);
+            addDiscountIfNotZero(new GiftEvent(totalPriceBeforeDiscount()), discountAmount);
         }
         return discountAmount;
     }
@@ -41,11 +41,11 @@ public class EventPlanner {
         return totalPriceBeforeDiscount() >= MINIMUM_DISCOUNT_PRICE;
     }
 
-    private Map<Event, Integer> calculateDiscount(Event event) {
-        Map<Event, Integer> discounts = new HashMap<>();
-        int discountAmount = event.discountAmount();
-        discounts.put(event, discountAmount);
-        return discounts;
+    private void addDiscountIfNotZero(Event event, Map<Event, Integer> discountAmount) {
+        int discount = event.discountAmount();
+        if (discount != 0) {
+            discountAmount.put(event, discount);
+        }
     }
 
     public int totalDiscountAmount() {
