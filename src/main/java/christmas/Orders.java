@@ -43,9 +43,9 @@ public class Orders {
                 .sum();
     }
 
-    public int getAppetizerCounts() {
+    public int getDessertCounts() {
         return orders.entrySet().stream()
-                .filter(menuIntegerEntry -> menuIntegerEntry.getKey().getType() == MenuType.APPETIZER)
+                .filter(menuIntegerEntry -> menuIntegerEntry.getKey().getType() == MenuType.DESSERT)
                 .mapToInt(Map.Entry::getValue)
                 .sum();
     }
