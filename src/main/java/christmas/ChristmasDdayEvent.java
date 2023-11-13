@@ -6,17 +6,17 @@ public class ChristmasDdayEvent implements Event {
     private static final int INITIAL_DISCOUNT = 1000;
     private static final int INCREASE_DISCOUNT_AMOUNT = 100;
 
-    private final DecemberWillVisitDate decemberWillVisitDate;
+    private final VisitDate visitDate;
 
-    public ChristmasDdayEvent(DecemberWillVisitDate decemberWillVisitDate) {
-        this.decemberWillVisitDate = decemberWillVisitDate;
+    public ChristmasDdayEvent(VisitDate visitDate) {
+        this.visitDate = visitDate;
     }
 
     @Override
     public int discountAmount() {
-        if (decemberWillVisitDate.getDate() > CHRISTMAS) {
+        if (visitDate.getDate() > CHRISTMAS) {
             return 0;
         }
-        return INITIAL_DISCOUNT + (decemberWillVisitDate.getDate() - START_DAY) * INCREASE_DISCOUNT_AMOUNT;
+        return INITIAL_DISCOUNT + (visitDate.getDate() - START_DAY) * INCREASE_DISCOUNT_AMOUNT;
     }
 }
