@@ -11,9 +11,9 @@ public class WeekdayEvent implements Event {
     private static final int DISCOUNT_PER_APPETIZER = 2023;
 
     private final VisitDate visitDate;
-    private final Map<Menu, Integer> orders;
+    private final Orders orders;
 
-    public WeekdayEvent(VisitDate visitDate, Map<Menu, Integer> orders) {
+    public WeekdayEvent(VisitDate visitDate, Orders orders) {
         this.visitDate = visitDate;
         this.orders = orders;
     }
@@ -23,18 +23,10 @@ public class WeekdayEvent implements Event {
         if (!isEventDay()) {
             return 0;
         }
-
-        int appetizerCounts = getAppetizerCounts();
+        int appetizerCounts = orders.getAppetizerCounts();
         return appetizerCounts * DISCOUNT_PER_APPETIZER;
     }
 
-    private int getAppetizerCounts() {
-        int appetizerCounts = orders.entrySet().stream()
-                .filter(menuIntegerEntry -> menuIntegerEntry.getKey().getType() == MenuType.APPETIZER)
-                .mapToInt(Map.Entry::getValue)
-                .sum();
-        return appetizerCounts;
-    }
 
     private boolean isEventDay() {
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();

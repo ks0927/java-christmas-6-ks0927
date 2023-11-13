@@ -8,18 +8,16 @@ import java.util.Optional;
 public class EventPlanner {
     private static final int MINIMUM_DISCOUNT_PRICE = 10000;
 
-    private final Map<Menu, Integer> orders;
+    private final Orders orders;
     private final VisitDate visitDate;
 
-    public EventPlanner(Map<Menu, Integer> orders, VisitDate visitDate) {
+    public EventPlanner(Orders orders, VisitDate visitDate) {
         this.orders = orders;
         this.visitDate = visitDate;
     }
 
     public int totalPriceBeforeDiscount() {
-        return orders.entrySet().stream()
-                .mapToInt(map -> map.getValue() * map.getKey().getPrice())
-                .sum();
+        return orders.totalPrice();
     }
 
     public Optional<Menu> giftMenu() {
@@ -35,7 +33,6 @@ public class EventPlanner {
             discountAmount.putAll(calculateDiscount(new WeekendEvent(visitDate, orders)));
             discountAmount.putAll(calculateDiscount(new StarEvent(visitDate)));
             discountAmount.putAll(calculateDiscount(new GiftEvent(totalPriceBeforeDiscount())));
-
         }
         return discountAmount;
     }

@@ -19,7 +19,7 @@ class WeekendEventTest {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
         Map<Menu, Integer> orders = new HashMap<>();
         orders.put(Menu.T_BONE_STEAK, 2);
-        WeekendEvent weekendEvent = new WeekendEvent(visitDate, orders);
+        WeekendEvent weekendEvent = new WeekendEvent(visitDate, new Orders(orders));
 
         int discountAmount = weekendEvent.discountAmount();
 
@@ -33,7 +33,7 @@ class WeekendEventTest {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
         Map<Menu, Integer> orders = new HashMap<>();
         orders.put(Menu.T_BONE_STEAK, 2);
-        WeekendEvent weekendEvent = new WeekendEvent(visitDate, orders);
+        WeekendEvent weekendEvent = new WeekendEvent(visitDate, new Orders(orders));
 
         int discountAmount = weekendEvent.discountAmount();
 

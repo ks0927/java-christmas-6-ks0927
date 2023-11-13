@@ -10,9 +10,9 @@ public class WeekendEvent implements Event {
     private static final int DISCOUNT_PER_MAIN = 2023;
 
     private final VisitDate visitDate;
-    private final Map<Menu, Integer> orders;
+    private final Orders orders;
 
-    public WeekendEvent(VisitDate visitDate, Map<Menu, Integer> orders) {
+    public WeekendEvent(VisitDate visitDate, Orders orders) {
         this.visitDate = visitDate;
         this.orders = orders;
     }
@@ -23,16 +23,8 @@ public class WeekendEvent implements Event {
             return 0;
         }
 
-        int mainCounts = getMainCounts();
+        int mainCounts = orders.getMainCounts();
         return mainCounts * DISCOUNT_PER_MAIN;
-    }
-
-    private int getMainCounts() {
-        int mainCounts = orders.entrySet().stream()
-                .filter(menuIntegerEntry -> menuIntegerEntry.getKey().getType() == MenuType.MAIN)
-                .mapToInt(Map.Entry::getValue)
-                .sum();
-        return mainCounts;
     }
 
     private boolean isEventDay() {
