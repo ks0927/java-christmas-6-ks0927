@@ -16,8 +16,8 @@ class ChristmasDdayEventTest {
             "25, 3400",
             "26, 0"
     })
-    public void discountAmountTest(int day, int expectedDiscount) {
-        DecemberWillVisitDate visitDate = new DecemberWillVisitDate(day);
+    public void discountAmountTest(int dayOfMonth, int expectedDiscount) {
+        VisitDate visitDate = VisitDate.from(dayOfMonth);
         ChristmasDdayEvent event = new ChristmasDdayEvent(visitDate);
         assertThat(event.discountAmount()).isEqualTo(expectedDiscount);
     }
