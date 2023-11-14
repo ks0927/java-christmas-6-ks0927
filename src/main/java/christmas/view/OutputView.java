@@ -62,4 +62,13 @@ public class OutputView {
                 .map(entry -> entry.getKey().getName() + ": -" + String.format("%,d원", entry.getValue()))
                 .forEach(System.out::println);
     }
+
+    public void printTotalDiscountPrice(EventPlanner eventPlanner) {
+        System.out.println(TOTAL_DISCOUNT_PRICE_HEADER);
+        if (eventPlanner.totalDiscountAmount() == 0) {
+            System.out.println(NONE_MESSAGE);
+            return;
+        }
+        System.out.printf("-" + PRICE_FORMAT, eventPlanner.totalDiscountAmount());
+    }
 }
