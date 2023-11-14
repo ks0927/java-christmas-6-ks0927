@@ -71,4 +71,9 @@ public class OutputView {
         }
         System.out.printf("-" + PRICE_FORMAT, eventPlanner.totalDiscountAmount());
     }
+
+    public void printEstimatedPayment(EventPlanner eventPlanner) {
+        System.out.println(ESTIMATED_PAYMENT_HEADER);
+        System.out.printf(PRICE_FORMAT, eventPlanner.estimatedPaymentAfterDiscount());
+    }
 }
