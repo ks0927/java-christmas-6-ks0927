@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("평일 할인 테스트")
 class WeekdayEventTest {
-    private static final int DISCOUNT_PER_APPETIZER = 2023;
+    private static final int DISCOUNT_PER_DESSERT = 2023;
 
     @DisplayName("할인이 적용되는 요일에 대한 테스트")
     @ParameterizedTest
@@ -18,12 +18,12 @@ class WeekdayEventTest {
     void discount_on_event_day(int dayOfMonth) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
         Map<Menu, Integer> orders = new HashMap<>();
-        orders.put(Menu.TAPAS, 2);
+        orders.put(Menu.CHOCOLATE_CAKE, 2);
         WeekdayEvent weekdayEvent = new WeekdayEvent(visitDate, new Orders(orders));
 
         int discountAmount = weekdayEvent.discountAmount();
 
-        assertThat(discountAmount).isEqualTo(2 * DISCOUNT_PER_APPETIZER);
+        assertThat(discountAmount).isEqualTo(2 * DISCOUNT_PER_DESSERT);
     }
 
     @DisplayName("할인이 적용되지 않는 요일에 대한 테스트")
@@ -32,7 +32,7 @@ class WeekdayEventTest {
     void no_discount_on_non_event_day(int dayOfMonth) {
         VisitDate visitDate = VisitDate.from(dayOfMonth);
         Map<Menu, Integer> orders = new HashMap<>();
-        orders.put(Menu.TAPAS, 2);
+        orders.put(Menu.CHOCOLATE_CAKE, 2);
         WeekdayEvent weekdayEvent = new WeekdayEvent(visitDate, new Orders(orders));
 
         int discountAmount = weekdayEvent.discountAmount();
