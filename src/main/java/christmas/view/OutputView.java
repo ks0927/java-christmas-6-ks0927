@@ -48,4 +48,18 @@ public class OutputView {
                 .orElse(NONE_MESSAGE);
         System.out.println(s);
     }
+
+    public void printDiscountDetail(EventPlanner eventPlanner) {
+        System.out.println(DISCOUNT_DETAIL_HEADER);
+        Map<Event, Integer> eventIntegerMap = eventPlanner.totalDiscountDetails();
+
+        if (eventIntegerMap.isEmpty()) {
+            System.out.println(NONE_MESSAGE);
+            return;
+        }
+
+        eventIntegerMap.entrySet().stream()
+                .map(entry -> entry.getKey().getName() + ": -" + String.format("%,d원", entry.getValue()))
+                .forEach(System.out::println);
+    }
 }
