@@ -5,15 +5,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Mapper {
-    private static final String VISIT_DATE_ERROR_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
-    private static final String ORDER_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
-
     public static VisitDate mapToVisitDate(String input) {
         int dayOfMonth;
         try {
             dayOfMonth = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(VISIT_DATE_ERROR_MESSAGE);
+            throw new IllegalArgumentException(PromotionException.dateException());
         }
         return VisitDate.from(dayOfMonth);
     }
@@ -27,7 +24,7 @@ public class Mapper {
                         details -> validateMenu(details[0]),
                         details -> validateQuantity(details[1]),
                         (existing, replacement) -> {
-                            throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
+                            throw new IllegalArgumentException(PromotionException.orderException());
                         }));
 
         return new Orders(orderMap);
@@ -36,7 +33,7 @@ public class Mapper {
     private static String[] validateOrderFormat(String target) {
         String[] details = target.split("-");
         if (details.length != 2) {
-            throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
+            throw new IllegalArgumentException(PromotionException.orderException());
         }
         return details;
     }
@@ -45,7 +42,7 @@ public class Mapper {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.getName().equals(target))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(ORDER_ERROR_MESSAGE));
+                .orElseThrow(() -> new IllegalArgumentException(PromotionException.orderException()));
     }
 
     private static int validateQuantity(String target) {
@@ -53,11 +50,11 @@ public class Mapper {
         try {
             quantity = Integer.parseInt(target);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
+            throw new IllegalArgumentException(PromotionException.orderException());
         }
 
         if (quantity < 1) {
-            throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
+            throw new IllegalArgumentException(PromotionException.orderException());
         }
         return quantity;
     }

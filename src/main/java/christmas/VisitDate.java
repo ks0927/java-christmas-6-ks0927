@@ -9,7 +9,6 @@ public class VisitDate {
     private static final int DEFAULT_YEAR = 2023;
     private static final int DEFAULT_MONTH = 12;
     private static final int START_OF_MONTH = 1;
-    private static final String INVALID_RANGE_ERROR_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
 
     private final LocalDate date;
 
@@ -25,7 +24,7 @@ public class VisitDate {
 
     private static void validate(int dayOfMonth) {
         if (isInvalidRange(dayOfMonth)) {
-            throw new IllegalArgumentException(INVALID_RANGE_ERROR_MESSAGE);
+            throw new IllegalArgumentException(PromotionException.dateException());
         }
     }
 

@@ -8,6 +8,7 @@ public class WeekdayEvent implements Event {
     private static final List<DayOfWeek> EVENT_DAYS = Arrays.asList(DayOfWeek.SUNDAY, DayOfWeek.MONDAY,
             DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY);
     private static final int DISCOUNT_PER_DESSERT = 2023;
+
     private final String name = "평일 할인";
     private final VisitDate visitDate;
     private final Orders orders;
