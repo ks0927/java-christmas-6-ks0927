@@ -27,4 +27,11 @@ public class OutputView {
     public void printEventPreviewMessage(int dayOfMonth) {
         System.out.printf(EVENT_PREVIEW_MESSAGE, dayOfMonth);
     }
+
+    public void printOrderMenuMessage(Orders orders) {
+        System.out.println(ORDER_MENU_HEADER);
+        orders.getOrders().entrySet().stream()
+                .map(entry -> String.format(MENU_FORMAT, entry.getKey().getName(), entry.getValue()))
+                .forEach(System.out::println);
+    }
 }
