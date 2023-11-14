@@ -23,4 +23,8 @@ public class OutputView {
     public void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
     }
+
+    public void printEventPreviewMessage(int dayOfMonth) {
+        System.out.printf(EVENT_PREVIEW_MESSAGE, dayOfMonth);
+    }
 }
