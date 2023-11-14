@@ -34,4 +34,9 @@ public class OutputView {
                 .map(entry -> String.format(MENU_FORMAT, entry.getKey().getName(), entry.getValue()))
                 .forEach(System.out::println);
     }
+
+    public void printTotalOrderPrice(EventPlanner eventPlanner) {
+        System.out.println(TOTAL_ORDER_PRICE_HEADER);
+        System.out.printf(PRICE_FORMAT, eventPlanner.totalPriceBeforeDiscount());
+    }
 }
