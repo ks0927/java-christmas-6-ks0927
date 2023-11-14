@@ -1,5 +1,6 @@
 package christmas;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Orders {
@@ -55,5 +56,14 @@ public class Orders {
                 .filter(menuIntegerEntry -> menuIntegerEntry.getKey().getType() == MenuType.MAIN)
                 .mapToInt(Map.Entry::getValue)
                 .sum();
+    }
+
+    /**
+     * 주문 결과를 Map의 형태로 반환한다.
+     * HashMap을 통한 반환은 얕은 복사지만 Menu와 Integer는 불변객체로 충분히 안전하다.
+     * 단, 출력 등의 이유를 제외하고는 사용을 권장하지 않는다.
+     */
+    public Map<Menu, Integer> getOrders() {
+        return new HashMap<>(orders);
     }
 }
