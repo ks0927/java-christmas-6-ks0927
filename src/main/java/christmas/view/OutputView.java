@@ -1,10 +1,11 @@
 package christmas.view;
 
 import christmas.Event;
+import christmas.EventBadge;
 import christmas.EventPlanner;
-import christmas.Menu;
 import christmas.Orders;
 import java.util.Map;
+import java.util.Optional;
 
 public class OutputView {
     private static final String WELCOME_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -75,5 +76,15 @@ public class OutputView {
     public void printEstimatedPayment(EventPlanner eventPlanner) {
         System.out.println(ESTIMATED_PAYMENT_HEADER);
         System.out.printf(PRICE_FORMAT, eventPlanner.estimatedPaymentAfterDiscount());
+    }
+
+    public void printEventBadge(EventPlanner eventPlanner) {
+        System.out.println(EVENT_BADGE_HEADER);
+        Optional<EventBadge> eventBadge = eventPlanner.eventBadge();
+        if (eventBadge.isEmpty()) {
+            System.out.println(NONE_MESSAGE);
+            return;
+        }
+        System.out.println(eventBadge.get().getName());
     }
 }
