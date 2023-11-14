@@ -3,12 +3,12 @@ package christmas;
 import java.time.DayOfWeek;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class WeekendEvent implements Event {
     private static final List<DayOfWeek> EVENT_DAYS = Arrays.asList(DayOfWeek.FRIDAY, DayOfWeek.SATURDAY);
     private static final int DISCOUNT_PER_MAIN = 2023;
 
+    private final String name = "주말 할인";
     private final VisitDate visitDate;
     private final Orders orders;
 
@@ -30,5 +30,10 @@ public class WeekendEvent implements Event {
     private boolean isEventDay() {
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
         return EVENT_DAYS.contains(dayOfWeek);
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

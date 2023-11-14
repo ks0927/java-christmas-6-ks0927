@@ -6,6 +6,7 @@ public class ChristmasDdayEvent implements Event {
     private static final int INITIAL_DISCOUNT = 1000;
     private static final int INCREASE_DISCOUNT_AMOUNT = 100;
 
+    private final String name = "크리스마스 디데이 할인";
     private final VisitDate visitDate;
 
     public ChristmasDdayEvent(VisitDate visitDate) {
@@ -18,5 +19,10 @@ public class ChristmasDdayEvent implements Event {
             return 0;
         }
         return INITIAL_DISCOUNT + (visitDate.getDate() - START_DAY) * INCREASE_DISCOUNT_AMOUNT;
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }
