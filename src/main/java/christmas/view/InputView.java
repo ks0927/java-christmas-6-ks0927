@@ -1,6 +1,9 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.Orders;
+import christmas.VisitDate;
+import java.util.function.Supplier;
 
 public class InputView {
     private static final String READ_VISIT_DATE_MESSAGE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
@@ -12,13 +15,23 @@ public class InputView {
         this.inputMapper = inputMapper;
     }
 
-    public String readVisitDate() {
+    public VisitDate readVisitDate() {
         System.out.println(READ_VISIT_DATE_MESSAGE);
-        return Console.readLine();
+        return getInputUntilValid(()->inputMapper.mapToVisitDate(Console.readLine()));
     }
 
-    public String readOrders() {
+    public Orders readOrders() {
         System.out.println(READ_ORDERS_MESSAGE);
-        return Console.readLine();
+        return getInputUntilValid(()->inputMapper.mapToOrders(Console.readLine()));
+    }
+
+    private <T> T getInputUntilValid(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
