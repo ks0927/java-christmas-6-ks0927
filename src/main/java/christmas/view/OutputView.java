@@ -39,4 +39,13 @@ public class OutputView {
         System.out.println(TOTAL_ORDER_PRICE_HEADER);
         System.out.printf(PRICE_FORMAT, eventPlanner.totalPriceBeforeDiscount());
     }
+
+
+    public void printGiftMenu(EventPlanner eventPlanner) {
+        System.out.println(GIFT_MENU_HEADER);
+        String s = eventPlanner.giftMenu()
+                .map(menu -> menu.getName() + " 1개")
+                .orElse(NONE_MESSAGE);
+        System.out.println(s);
+    }
 }
