@@ -34,22 +34,24 @@ public class OutputView {
 
     public void printOrderMenuMessage(Orders orders) {
         System.out.println(ORDER_MENU_HEADER);
+        ordersDetail(orders);
+        System.out.println();
+    }
+
+    private void ordersDetail(Orders orders) {
         orders.getOrders().entrySet().stream()
                 .map(entry -> String.format(MENU_FORMAT, entry.getKey().getName(), entry.getValue()))
                 .forEach(System.out::println);
-        System.out.println();
     }
 
-    public void printTotalOrderPrice(EventPlanner eventPlanner) {
+    public void printTotalOrderPrice(int totalOrderPrice) {
         System.out.println(TOTAL_ORDER_PRICE_HEADER);
-        System.out.println(String.format(PRICE_FORMAT, eventPlanner.totalPriceBeforeDiscount()));
+        System.out.println(String.format(PRICE_FORMAT, totalOrderPrice));
         System.out.println();
     }
 
-
-    public void printGiftMenu(EventPlanner eventPlanner) {
+    public void printGiftMenu(Map<Menu, Integer> gifts) {
         System.out.println(GIFT_MENU_HEADER);
-        Map<Menu, Integer> gifts = eventPlanner.giftMenu();
 
         if (gifts.isEmpty()) {
             System.out.println(NONE_MESSAGE);
@@ -62,41 +64,39 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printDiscountDetail(EventPlanner eventPlanner) {
+    public void printDiscountDetail(Map<Event, Integer> discountDetail) {
         System.out.println(DISCOUNT_DETAIL_HEADER);
-        Map<Event, Integer> eventIntegerMap = eventPlanner.totalDiscountDetails();
 
-        if (eventIntegerMap.isEmpty()) {
+        if (discountDetail.isEmpty()) {
             System.out.println(NONE_MESSAGE);
             return;
         }
 
-        eventIntegerMap.entrySet().stream()
+        discountDetail.entrySet().stream()
                 .map(entry -> entry.getKey().getName() + ": -" + String.format(PRICE_FORMAT, entry.getValue()))
                 .forEach(System.out::println);
         System.out.println();
     }
 
-    public void printTotalDiscountPrice(EventPlanner eventPlanner) {
+    public void printTotalDiscountPrice(int totalDiscountAmount) {
         System.out.println(TOTAL_DISCOUNT_PRICE_HEADER);
-        if (eventPlanner.totalDiscountAmount() == 0) {
-            System.out.println(String.format(PRICE_FORMAT, eventPlanner.totalDiscountAmount()));
+        if (totalDiscountAmount == 0) {
+            System.out.println(String.format(PRICE_FORMAT, totalDiscountAmount));
             System.out.println();
             return;
         }
-        System.out.println(String.format("-" + PRICE_FORMAT, eventPlanner.totalDiscountAmount()));
+        System.out.println(String.format("-" + PRICE_FORMAT, totalDiscountAmount));
         System.out.println();
     }
 
-    public void printEstimatedPayment(EventPlanner eventPlanner) {
+    public void printEstimatedPayment(int estimatedPaymentAfterDiscount) {
         System.out.println(ESTIMATED_PAYMENT_HEADER);
-        System.out.println(String.format(PRICE_FORMAT, eventPlanner.estimatedPaymentAfterDiscount()));
+        System.out.println(String.format(PRICE_FORMAT, estimatedPaymentAfterDiscount));
         System.out.println();
     }
 
-    public void printEventBadge(EventPlanner eventPlanner) {
+    public void printEventBadge(Optional<EventBadge> eventBadge) {
         System.out.println(EVENT_BADGE_HEADER);
-        Optional<EventBadge> eventBadge = eventPlanner.eventBadge();
         if (eventBadge.isEmpty()) {
             System.out.println(NONE_MESSAGE);
             return;

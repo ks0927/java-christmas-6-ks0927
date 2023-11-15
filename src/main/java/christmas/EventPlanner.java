@@ -20,25 +20,31 @@ public class EventPlanner {
         return orders.totalPrice();
     }
 
-    public Map<Menu, Integer> giftMenu() {
-        GiftEvent giftEvent = new GiftEvent(totalPriceBeforeDiscount());
+    public Map<Menu, Integer> giftMenu(int totalPriceBeforeDiscount) {
+        GiftEvent giftEvent = new GiftEvent(totalPriceBeforeDiscount);
         return giftEvent.provideGifts();
     }
 
-    public Map<Event, Integer> totalDiscountDetails() {
+    // 모든 이벤트의 적용 내역을 관리하는 메서드
+    public Map<Event, Integer> totalDiscountDetails(int totalPriceBeforeDiscount) {
         Map<Event, Integer> discountAmount = new HashMap<>();
-        if (isEligibleForDiscount()) {
-            addDiscountIfNotZero(new ChristmasDdayEvent(visitDate), discountAmount);
-            addDiscountIfNotZero(new WeekdayEvent(visitDate, orders), discountAmount);
-            addDiscountIfNotZero(new WeekendEvent(visitDate, orders), discountAmount);
-            addDiscountIfNotZero(new StarEvent(visitDate), discountAmount);
-            addDiscountIfNotZero(new GiftEvent(totalPriceBeforeDiscount()), discountAmount);
+        if (isEligibleForDiscount(totalPriceBeforeDiscount)) {
+            addDiscountAmountsForEvents(totalPriceBeforeDiscount, discountAmount);
         }
         return discountAmount;
     }
 
-    private boolean isEligibleForDiscount() {
-        return totalPriceBeforeDiscount() >= MINIMUM_DISCOUNT_PRICE;
+    private boolean isEligibleForDiscount(int totalPriceBeforeDiscount) {
+        return totalPriceBeforeDiscount >= MINIMUM_DISCOUNT_PRICE;
+    }
+
+    // 적용할 이벤트를 추가하는 메서드
+    private void addDiscountAmountsForEvents(int totalPriceBeforeDiscount, Map<Event, Integer> discountAmount) {
+        addDiscountIfNotZero(new ChristmasDdayEvent(visitDate), discountAmount);
+        addDiscountIfNotZero(new WeekdayEvent(visitDate, orders), discountAmount);
+        addDiscountIfNotZero(new WeekendEvent(visitDate, orders), discountAmount);
+        addDiscountIfNotZero(new StarEvent(visitDate), discountAmount);
+        addDiscountIfNotZero(new GiftEvent(totalPriceBeforeDiscount), discountAmount);
     }
 
     private void addDiscountIfNotZero(Event event, Map<Event, Integer> discountAmount) {
@@ -48,21 +54,21 @@ public class EventPlanner {
         }
     }
 
-    public int totalDiscountAmount() {
-        return totalDiscountDetails().entrySet().stream()
+    public int totalDiscountAmount(Map<Event, Integer> totalDiscountDetails) {
+        return totalDiscountDetails.entrySet().stream()
                 .mapToInt(value -> value.getValue())
                 .sum();
     }
 
-    public int estimatedPaymentAfterDiscount() {
-        int realDiscountAmount = totalDiscountDetails().entrySet().stream()
+    public int estimatedPaymentAfterDiscount(Map<Event, Integer> totalDiscountDetails, int totalPriceBeforeDiscount) {
+        int realDiscountAmount = totalDiscountDetails.entrySet().stream()
                 .filter(value -> !(value.getKey() instanceof GiftEvent))
                 .mapToInt(Entry::getValue)
                 .sum();
-        return totalPriceBeforeDiscount() - realDiscountAmount;
+        return totalPriceBeforeDiscount - realDiscountAmount;
     }
 
-    public Optional<EventBadge> eventBadge() {
-        return EventBadge.getBadgeByDiscountAmount(totalDiscountAmount());
+    public Optional<EventBadge> eventBadge(int totalDiscountAmount) {
+        return EventBadge.getBadgeByDiscountAmount(totalDiscountAmount);
     }
 }
