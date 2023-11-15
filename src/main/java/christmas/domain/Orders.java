@@ -1,5 +1,6 @@
-package christmas;
+package christmas.domain;
 
+import christmas.exception.PromotionException;
 import java.util.HashMap;
 import java.util.Map;
 

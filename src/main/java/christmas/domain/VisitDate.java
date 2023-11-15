@@ -1,5 +1,6 @@
-package christmas;
+package christmas.domain;
 
+import christmas.exception.PromotionException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;

@@ -1,8 +1,8 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.Orders;
-import christmas.VisitDate;
+import christmas.domain.Orders;
+import christmas.domain.VisitDate;
 import java.util.function.Supplier;
 
 public class InputView {

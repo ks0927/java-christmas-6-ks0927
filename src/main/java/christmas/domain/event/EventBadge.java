@@ -1,4 +1,4 @@
-package christmas;
+package christmas.domain.event;
 
 import java.util.Arrays;
 import java.util.Comparator;

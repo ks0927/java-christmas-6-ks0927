@@ -3,6 +3,10 @@ package christmas;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import christmas.domain.Menu;
+import christmas.domain.Orders;
+import christmas.domain.VisitDate;
+import christmas.exception.PromotionException;
 import christmas.view.InputMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

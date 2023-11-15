@@ -1,4 +1,6 @@
-package christmas;
+package christmas.domain.event;
+
+import christmas.domain.VisitDate;
 
 public class ChristmasDdayEvent implements Event {
     private static final int EVENT_START_DAY = 1;

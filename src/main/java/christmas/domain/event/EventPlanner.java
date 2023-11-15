@@ -1,5 +1,8 @@
-package christmas;
+package christmas.domain.event;
 
+import christmas.domain.Menu;
+import christmas.domain.Orders;
+import christmas.domain.VisitDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;

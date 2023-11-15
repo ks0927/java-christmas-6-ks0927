@@ -2,6 +2,12 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.domain.Menu;
+import christmas.domain.Orders;
+import christmas.domain.VisitDate;
+import christmas.domain.event.Event;
+import christmas.domain.event.EventBadge;
+import christmas.domain.event.EventPlanner;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;

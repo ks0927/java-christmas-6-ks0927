@@ -1,11 +1,10 @@
 package christmas.view;
 
-import christmas.Event;
-import christmas.EventBadge;
-import christmas.EventPlanner;
-import christmas.Menu;
-import christmas.Orders;
-import christmas.VisitDate;
+import christmas.domain.event.Event;
+import christmas.domain.event.EventBadge;
+import christmas.domain.Menu;
+import christmas.domain.Orders;
+import christmas.domain.VisitDate;
 import java.util.Map;
 import java.util.Optional;
 

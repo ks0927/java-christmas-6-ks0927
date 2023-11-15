@@ -1,9 +1,9 @@
 package christmas.view;
 
-import christmas.Menu;
-import christmas.Orders;
-import christmas.PromotionException;
-import christmas.VisitDate;
+import christmas.domain.Menu;
+import christmas.domain.Orders;
+import christmas.exception.PromotionException;
+import christmas.domain.VisitDate;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;

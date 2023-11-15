@@ -1,5 +1,6 @@
-package christmas;
+package christmas.domain.event;
 
+import christmas.domain.VisitDate;
 import java.util.Arrays;
 import java.util.List;
 
