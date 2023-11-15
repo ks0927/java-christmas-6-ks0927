@@ -20,7 +20,7 @@ class InputMapperTest {
 
         VisitDate visitDate = inputMapper.mapToVisitDate(input);
 
-        assertThat(visitDate.getDate()).isEqualTo(25);
+        assertThat(visitDate.getDayOfMonth()).isEqualTo(25);
     }
 
     @Test

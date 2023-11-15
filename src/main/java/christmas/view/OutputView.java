@@ -4,6 +4,7 @@ import christmas.Event;
 import christmas.EventBadge;
 import christmas.EventPlanner;
 import christmas.Orders;
+import christmas.VisitDate;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,8 +26,8 @@ public class OutputView {
         System.out.println(WELCOME_MESSAGE);
     }
 
-    public void printEventPreviewMessage(int dayOfMonth) {
-        System.out.printf(EVENT_PREVIEW_MESSAGE, dayOfMonth);
+    public void printEventPreviewMessage(VisitDate visitDate) {
+        System.out.printf(EVENT_PREVIEW_MESSAGE, visitDate.getDayOfMonth());
     }
 
     public void printOrderMenuMessage(Orders orders) {
@@ -67,7 +68,7 @@ public class OutputView {
     public void printTotalDiscountPrice(EventPlanner eventPlanner) {
         System.out.println(TOTAL_DISCOUNT_PRICE_HEADER);
         if (eventPlanner.totalDiscountAmount() == 0) {
-            System.out.println(NONE_MESSAGE);
+            System.out.printf(PRICE_FORMAT,eventPlanner.totalDiscountAmount());
             return;
         }
         System.out.printf("-" + PRICE_FORMAT, eventPlanner.totalDiscountAmount());

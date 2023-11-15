@@ -27,10 +27,8 @@ public class WeekdayEvent implements Event {
         return appetizerCounts * DISCOUNT_PER_DESSERT;
     }
 
-
     private boolean isEventDay() {
-        DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
-        return EVENT_DAYS.contains(dayOfWeek);
+        return visitDate.containDayOfWeek(EVENT_DAYS);
     }
 
     @Override

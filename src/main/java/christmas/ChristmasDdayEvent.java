@@ -1,7 +1,7 @@
 package christmas;
 
 public class ChristmasDdayEvent implements Event {
-    private static final int START_DAY = 1;
+    private static final int EVENT_START_DAY = 1;
     private static final int CHRISTMAS = 25;
     private static final int INITIAL_DISCOUNT = 1000;
     private static final int INCREASE_DISCOUNT_AMOUNT = 100;
@@ -15,10 +15,10 @@ public class ChristmasDdayEvent implements Event {
 
     @Override
     public int discountAmount() {
-        if (visitDate.getDate() > CHRISTMAS) {
+        if (visitDate.calculateDaysDifference(CHRISTMAS) > 0) {
             return 0;
         }
-        return INITIAL_DISCOUNT + (visitDate.getDate() - START_DAY) * INCREASE_DISCOUNT_AMOUNT;
+        return INITIAL_DISCOUNT + (visitDate.calculateDaysDifference(EVENT_START_DAY)) * INCREASE_DISCOUNT_AMOUNT;
     }
 
     @Override

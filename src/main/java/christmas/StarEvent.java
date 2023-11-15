@@ -16,7 +16,7 @@ public class StarEvent implements Event {
 
     @Override
     public int discountAmount() {
-        if (EVENT_DAYS.contains(visitDate.getDate())) {
+        if (visitDate.containDayOfMonth(EVENT_DAYS)) {
             return SPECIAL_DISCOUNT;
         }
         return 0;

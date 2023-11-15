@@ -28,8 +28,7 @@ public class WeekendEvent implements Event {
     }
 
     private boolean isEventDay() {
-        DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
-        return EVENT_DAYS.contains(dayOfWeek);
+        return visitDate.containDayOfWeek(EVENT_DAYS);
     }
 
     @Override

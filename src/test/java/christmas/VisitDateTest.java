@@ -34,7 +34,7 @@ class VisitDateTest {
     public void containDate_true(int dayOfMonth) {
         List<Integer> dates = Arrays.asList(1, 15, 31);
         VisitDate visitDate = VisitDate.from(dayOfMonth);
-        assertThat(visitDate.containDate(dates)).isTrue();
+        assertThat(visitDate.containDayOfMonth(dates)).isTrue();
     }
 
     @DisplayName("날짜 리스트에 방문 날짜가 포함되지 않으면 false 반환 테스트")
@@ -43,6 +43,6 @@ class VisitDateTest {
     public void containDate_false(int dayOfMonth) {
         List<Integer> dates = Arrays.asList(1, 15, 31);
         VisitDate visitDate = VisitDate.from(dayOfMonth);
-        assertThat(visitDate.containDate(dates)).isFalse();
+        assertThat(visitDate.containDayOfMonth(dates)).isFalse();
     }
 }

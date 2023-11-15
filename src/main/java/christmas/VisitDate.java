@@ -34,13 +34,22 @@ public class VisitDate {
         return dayOfMonth < START_OF_MONTH || dayOfMonth > endOfMonth;
     }
 
-    public int getDate() {
+    public int getDayOfMonth() {
         return date.getDayOfMonth();
     }
 
-    public boolean containDate(List<Integer> target) {
+    public boolean containDayOfMonth(List<Integer> target) {
         return target.stream()
                 .anyMatch(dayOfMonth -> dayOfMonth == date.getDayOfMonth());
+    }
+
+    public boolean containDayOfWeek(List<DayOfWeek> target) {
+        return target.stream()
+                .anyMatch(dayOfWeek -> dayOfWeek == date.getDayOfWeek());
+    }
+
+    public int calculateDaysDifference(int dayOfMonth) {
+        return date.getDayOfMonth() - dayOfMonth;
     }
 
     public DayOfWeek getDayOfWeek() {
