@@ -26,10 +26,7 @@ public class Orders {
         int orderQuantity = target.entrySet().stream()
                 .mapToInt(Map.Entry::getValue)
                 .sum();
-        if (orderQuantity > MAX_ORDER_QUANTITY) {
-            return true;
-        }
-        return false;
+        return orderQuantity > MAX_ORDER_QUANTITY;
     }
 
     private boolean isAllDrinks(Map<Menu, Integer> target) {
