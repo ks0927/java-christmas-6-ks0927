@@ -20,9 +20,9 @@ public class EventPlanner {
         return orders.totalPrice();
     }
 
-    public Optional<Menu> giftMenu() {
+    public Map<Menu, Integer> giftMenu() {
         GiftEvent giftEvent = new GiftEvent(totalPriceBeforeDiscount());
-        return giftEvent.provideGift();
+        return giftEvent.provideGifts();
     }
 
     public Map<Event, Integer> totalDiscountDetails() {

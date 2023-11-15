@@ -3,6 +3,7 @@ package christmas.view;
 import christmas.Event;
 import christmas.EventBadge;
 import christmas.EventPlanner;
+import christmas.Menu;
 import christmas.Orders;
 import christmas.VisitDate;
 import java.util.Map;
@@ -45,10 +46,16 @@ public class OutputView {
 
     public void printGiftMenu(EventPlanner eventPlanner) {
         System.out.println(GIFT_MENU_HEADER);
-        String s = eventPlanner.giftMenu()
-                .map(menu -> menu.getName() + " 1개")
-                .orElse(NONE_MESSAGE);
-        System.out.println(s);
+        Map<Menu, Integer> gifts = eventPlanner.giftMenu();
+
+        if (gifts.isEmpty()) {
+            System.out.println(NONE_MESSAGE);
+            return;
+        }
+
+        gifts.entrySet().stream()
+                .map(menu -> String.format(MENU_FORMAT, menu.getKey().getName(), menu.getValue()))
+                .forEach(System.out::println);
     }
 
     public void printDiscountDetail(EventPlanner eventPlanner) {
@@ -68,7 +75,7 @@ public class OutputView {
     public void printTotalDiscountPrice(EventPlanner eventPlanner) {
         System.out.println(TOTAL_DISCOUNT_PRICE_HEADER);
         if (eventPlanner.totalDiscountAmount() == 0) {
-            System.out.printf(PRICE_FORMAT,eventPlanner.totalDiscountAmount());
+            System.out.printf(PRICE_FORMAT, eventPlanner.totalDiscountAmount());
             return;
         }
         System.out.printf("-" + PRICE_FORMAT, eventPlanner.totalDiscountAmount());

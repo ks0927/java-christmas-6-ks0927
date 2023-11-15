@@ -38,8 +38,8 @@ class EventPlannerTest {
     void testGiftMenu() {
         EventPlanner eventPlanner = new EventPlanner(orders, visitDate);
 
-        Menu giftMenu = eventPlanner.giftMenu().get();
-        assertThat(giftMenu).isEqualTo(Menu.CHAMPAGNE);
+        Map<Menu, Integer> gifts = eventPlanner.giftMenu();
+        assertThat(gifts.containsKey(Menu.CHAMPAGNE)).isTrue();
     }
 
     @Test

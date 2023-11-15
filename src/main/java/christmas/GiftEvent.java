@@ -1,6 +1,7 @@
 package christmas;
 
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GiftEvent implements Event {
     private static final Menu GIFT = Menu.CHAMPAGNE;
@@ -21,11 +22,12 @@ public class GiftEvent implements Event {
         return 0;
     }
 
-    public Optional<Menu> provideGift() {
+    public Map<Menu, Integer> provideGifts() {
+        Map<Menu, Integer> gifts = new HashMap<>();
         if (isEligibleForGift()) {
-            return Optional.of(GIFT);
+            gifts.put(GIFT, 1);
         }
-        return Optional.empty();
+        return gifts;
     }
 
     private boolean isEligibleForGift() {
