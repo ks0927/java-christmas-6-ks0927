@@ -53,18 +53,21 @@ public class ChristmasPromotion {
     }
 
     private void printTotalDiscountAmount(EventPlanner eventPlanner) {
-        int totalDiscountAmount = eventPlanner.totalDiscountAmount(eventPlanner.totalDiscountDetails(eventPlanner.totalPriceBeforeDiscount()));
+        int totalDiscountAmount = eventPlanner.totalDiscountAmount(
+                eventPlanner.totalDiscountDetails(eventPlanner.totalPriceBeforeDiscount()));
         outputView.printTotalDiscountPrice(totalDiscountAmount);
     }
 
     private void printEstimatedPaymentAfterDiscount(EventPlanner eventPlanner) {
-        int estimatedPaymentAfterDiscount = eventPlanner.estimatedPaymentAfterDiscount(eventPlanner.totalDiscountDetails(eventPlanner.totalPriceBeforeDiscount()),
+        int estimatedPaymentAfterDiscount = eventPlanner.estimatedPaymentAfterDiscount(
+                eventPlanner.totalDiscountDetails(eventPlanner.totalPriceBeforeDiscount()),
                 eventPlanner.totalPriceBeforeDiscount());
         outputView.printEstimatedPayment(estimatedPaymentAfterDiscount);
     }
 
     private void printEventBadge(EventPlanner eventPlanner) {
-        Optional<EventBadge> eventBadge = eventPlanner.eventBadge(eventPlanner.totalDiscountAmount(eventPlanner.totalDiscountDetails(eventPlanner.totalPriceBeforeDiscount())));
+        Optional<EventBadge> eventBadge = eventPlanner.eventBadge(eventPlanner.totalDiscountAmount(
+                eventPlanner.totalDiscountDetails(eventPlanner.totalPriceBeforeDiscount())));
         outputView.printEventBadge(eventBadge);
     }
 }

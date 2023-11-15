@@ -17,12 +17,12 @@ public class InputView {
 
     public VisitDate readVisitDate() {
         System.out.println(READ_VISIT_DATE_MESSAGE);
-        return getInputUntilValid(()->inputMapper.mapToVisitDate(Console.readLine()));
+        return getInputUntilValid(() -> inputMapper.mapToVisitDate(Console.readLine()));
     }
 
     public Orders readOrders() {
         System.out.println(READ_ORDERS_MESSAGE);
-        return getInputUntilValid(()->inputMapper.mapToOrders(Console.readLine()));
+        return getInputUntilValid(() -> inputMapper.mapToOrders(Console.readLine()));
     }
 
     private <T> T getInputUntilValid(Supplier<T> supplier) {
