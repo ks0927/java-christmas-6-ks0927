@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class OutputView {
     private static final String WELCOME_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
-    private static final String EVENT_PREVIEW_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n\n";
+    private static final String EVENT_PREVIEW_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String ORDER_MENU_HEADER = "<주문 메뉴>";
     private static final String MENU_FORMAT = "%s %d개";
     private static final String TOTAL_ORDER_PRICE_HEADER = "<할인 전 총주문 금액>";
@@ -21,14 +21,15 @@ public class OutputView {
     private static final String ESTIMATED_PAYMENT_HEADER = "<할인 후 예상 결제 금액>";
     private static final String EVENT_BADGE_HEADER = "<12월 이벤트 배지>";
     private static final String NONE_MESSAGE = "없음";
-    private static final String PRICE_FORMAT = "%,d원\n";
+    private static final String PRICE_FORMAT = "%,d원";
 
     public void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
     }
 
     public void printEventPreviewMessage(VisitDate visitDate) {
-        System.out.printf(EVENT_PREVIEW_MESSAGE, visitDate.getDayOfMonth());
+        System.out.println(String.format(EVENT_PREVIEW_MESSAGE, visitDate.getDayOfMonth()));
+        System.out.println();
     }
 
     public void printOrderMenuMessage(Orders orders) {
@@ -36,11 +37,13 @@ public class OutputView {
         orders.getOrders().entrySet().stream()
                 .map(entry -> String.format(MENU_FORMAT, entry.getKey().getName(), entry.getValue()))
                 .forEach(System.out::println);
+        System.out.println();
     }
 
     public void printTotalOrderPrice(EventPlanner eventPlanner) {
         System.out.println(TOTAL_ORDER_PRICE_HEADER);
-        System.out.printf(PRICE_FORMAT, eventPlanner.totalPriceBeforeDiscount());
+        System.out.println(String.format(PRICE_FORMAT, eventPlanner.totalPriceBeforeDiscount()));
+        System.out.println();
     }
 
 
@@ -56,6 +59,7 @@ public class OutputView {
         gifts.entrySet().stream()
                 .map(menu -> String.format(MENU_FORMAT, menu.getKey().getName(), menu.getValue()))
                 .forEach(System.out::println);
+        System.out.println();
     }
 
     public void printDiscountDetail(EventPlanner eventPlanner) {
@@ -68,22 +72,26 @@ public class OutputView {
         }
 
         eventIntegerMap.entrySet().stream()
-                .map(entry -> entry.getKey().getName() + ": -" + String.format("%,d원", entry.getValue()))
+                .map(entry -> entry.getKey().getName() + ": -" + String.format(PRICE_FORMAT, entry.getValue()))
                 .forEach(System.out::println);
+        System.out.println();
     }
 
     public void printTotalDiscountPrice(EventPlanner eventPlanner) {
         System.out.println(TOTAL_DISCOUNT_PRICE_HEADER);
         if (eventPlanner.totalDiscountAmount() == 0) {
-            System.out.printf(PRICE_FORMAT, eventPlanner.totalDiscountAmount());
+            System.out.println(String.format(PRICE_FORMAT, eventPlanner.totalDiscountAmount()));
+            System.out.println();
             return;
         }
-        System.out.printf("-" + PRICE_FORMAT, eventPlanner.totalDiscountAmount());
+        System.out.println(String.format("-" + PRICE_FORMAT, eventPlanner.totalDiscountAmount()));
+        System.out.println();
     }
 
     public void printEstimatedPayment(EventPlanner eventPlanner) {
         System.out.println(ESTIMATED_PAYMENT_HEADER);
-        System.out.printf(PRICE_FORMAT, eventPlanner.estimatedPaymentAfterDiscount());
+        System.out.println(String.format(PRICE_FORMAT, eventPlanner.estimatedPaymentAfterDiscount()));
+        System.out.println();
     }
 
     public void printEventBadge(EventPlanner eventPlanner) {
